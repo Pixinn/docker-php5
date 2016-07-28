@@ -25,9 +25,9 @@ RUN docker-php-ext-enable gd.so iconv.so intl.so json.so mcrypt.so mysql.so mysq
 
 #INSTALL SENDMAIL AND CONFIGURE POSTFIX SERVER
 #Read http://www.cyberciti.biz/faq/linux-configure-sendmail-as-outbound-submission-mta/
-ENV SMTP_SERVER web_mail_1
+ARG SMTP_SERVER=web_mail_1
 RUN apt-get install -y sendmail
-sed -i.bak "s/D{MTAHost}.*/D{MTAHost}$SMTP_SERVER/g" /etc/mail/submit.cf
+RUN sed -i.bak "s/D{MTAHost}.*/D{MTAHost}$SMTP_SERVER/g" /etc/mail/submit.cf
 
 # Expose PHP-FPM port
 EXPOSE 9000
