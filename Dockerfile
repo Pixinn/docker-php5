@@ -30,5 +30,7 @@ RUN docker-php-ext-install -j$(nproc) iconv mcrypt json gd  tidy pdo mysql mysql
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-enable gd.so iconv.so intl.so json.so mcrypt.so mysql.so mysqli.so mbstring.so opcache.so curl.so pdo.so tidy.so
 
+RUN echo -e "sendmail_path = /usr/sbin/sendmail -t -i\nSMTP = mail\nsmtp_port = 25" >> /usr/local/etc/php/conf.d/php.ini
+
 # Expose PHP-FPM port
 EXPOSE 9000
